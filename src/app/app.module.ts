@@ -26,6 +26,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import {CategoryService} from "./services/category.service";
 import {FormsModule} from "@angular/forms";
 import {ProductService} from "./services/product.service";
+import {CustomFormsModule} from "ng2-validation";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {ProductService} from "./services/product.service";
     AngularFireAuthModule,
     NgbModule.forRoot(),
     FormsModule,
+    CustomFormsModule,
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
       {path: "products", component: ProductsComponent},
@@ -59,9 +61,11 @@ import {ProductService} from "./services/product.service";
       {path: "order-success", component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       {path: "my/orders", component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
-      {path: "admin/products", component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]},
       {path: "admin/products/new", component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: "admin/products/:id", component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: "admin/products", component: AdminProductsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]},
       {path: "admin/orders", component: AdminOrdersComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]},
