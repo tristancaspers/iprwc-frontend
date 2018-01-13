@@ -54,7 +54,7 @@ import {DataTableModule} from "angular-4-data-table";
     CustomFormsModule,
     DataTableModule,
     RouterModule.forRoot([
-      {path: "", component: HomeComponent},
+      {path: "", component: ProductsComponent},
       {path: "products", component: ProductsComponent},
       {path: "shopping-cart", component: ShoppingCartComponent},
       {path: "login", component: LoginComponent},
