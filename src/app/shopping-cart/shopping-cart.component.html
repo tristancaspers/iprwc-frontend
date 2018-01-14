@@ -26,14 +26,14 @@
     </tbody>
     <tfoot>
       <tr>
+        <th>  <button class="btn btn-danger" *ngIf="cart.items.length" (click)="clearCart()">Clear shopping cart</button></th>
         <th></th>
-        <th></th>
-        <th></th>
+        <th>  <a class="btn btn-primary" *ngIf="cart.items.length" routerLink="/check-out">Place order</a></th>
         <th class="text-right">{{ cart.totalPrice | currency:"EUR":true }}</th>
       </tr>
     </tfoot>
   </table>
-  <button class="btn btn-danger btn-sm" *ngIf="cart.items.length" (click)="clearCart()">Clear shopping cart</button>
-  <a class="btn btn-primary" *ngIf="cart.items.length" routerLink="/check-out">Place order</a>
+
+
 </div>
 

@@ -2,6 +2,10 @@
   margin-bottom: 30px;
 }
 
+.card-body {
+  height: 120px;
+}
+
 .card-footer {
   padding: 0;
 }
