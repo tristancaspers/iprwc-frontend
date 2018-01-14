@@ -1,3 +1,23 @@
 <div class="box">
   <button class="btn btn-primary" (click)="login()"><i class="fa fa-google" aria-hidden="true"></i> Login using Google</button>
 </div>
+<b>OR</b>
+<div class="box">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="">Email</label>
+      <input #email="ngModel" name="email" [(ngModel)]="shipping.email" type="email" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+        <div *ngIf="email.errors.required">Emailadress required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="">Password</label>
+      <input #password="ngModel" name="password" [(ngModel)]="shipping.password" type="password" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+        <div *ngIf="password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" [class.disabled]="f.invalid" (click)="login()"><i class="fa fa-gamepad" aria-hidden="true"></i> Login with GameHub</button>
+  </form>
+</div>

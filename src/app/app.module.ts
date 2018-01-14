@@ -7,7 +7,6 @@ import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './check-out/check-out.component';
@@ -41,7 +40,6 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     ProductsComponent,
     ShoppingCartComponent,
     CheckOutComponent,
