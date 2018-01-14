@@ -13,4 +13,16 @@ export class OrderService {
     return result;
   }
 
+  getAll() {
+    return this.db.list("/orders");
+  }
+
+  getOrdersByUser(userId: string) {
+    return this.db.list("/orders", {
+      query: {
+        orderByChild: "userId",
+        equalTo: userId
+      }
+    });
+  }
 }
