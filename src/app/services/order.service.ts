@@ -5,13 +5,7 @@ import {ShoppingCartService} from "./shopping-cart.service";
 @Injectable()
 export class OrderService {
 
-  constructor(private db: AngularFireDatabase, private cartStorage: ShoppingCartService) { }
-
-  async placeOrder(order) {
-    let result = await this.db.list("/orders").push(order);
-    this.cartStorage.clearCart();
-    return result;
-  }
+  constructor(private db: AngularFireDatabase, private cartStorage: ShoppingCartService) {}
 
   getAll() {
     return this.db.list("/orders");
@@ -24,5 +18,11 @@ export class OrderService {
         equalTo: userId
       }
     });
+  }
+
+  async placeOrder(order) {
+    let result = await this.db.list("/orders").push(order);
+    this.cartStorage.clearCart();
+    return result;
   }
 }

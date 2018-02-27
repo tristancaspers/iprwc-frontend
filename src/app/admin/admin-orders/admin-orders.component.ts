@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {OrderService} from "../../services/order.service";
 
 @Component({
@@ -6,14 +6,10 @@ import {OrderService} from "../../services/order.service";
   templateUrl: './admin-orders.component.html',
   styleUrls: ['./admin-orders.component.css']
 })
-export class AdminOrdersComponent implements OnInit {
+export class AdminOrdersComponent {
   orders$;
 
   constructor(private orderStorage: OrderService) {
     this.orders$ = orderStorage.getAll();
   }
-
-  ngOnInit() {
-  }
-
 }

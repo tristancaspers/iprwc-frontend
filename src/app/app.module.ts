@@ -35,6 +35,7 @@ import {OrderService} from "./services/order.service";
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { FooterComponent } from './footer/footer.component';
+import {ApiService} from "./services/api.service";
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { FooterComponent } from './footer/footer.component';
     CategoryService,
     ProductService,
     ShoppingCartService,
-    OrderService
+    OrderService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })
