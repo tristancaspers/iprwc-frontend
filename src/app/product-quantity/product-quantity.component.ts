@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from "../models/product";
+import {ProductModel} from "../models/product";
 import {ShoppingCartService} from "../services/shopping-cart.service";
 
 @Component({
@@ -8,19 +8,11 @@ import {ShoppingCartService} from "../services/shopping-cart.service";
   styleUrls: ['./product-quantity.component.css']
 })
 export class ProductQuantityComponent implements OnInit {
-  @Input("product") product: Product;
+  @Input("product") product: ProductModel;
   @Input("shopping-cart") shoppingCart;
 
   constructor(private cartStorage: ShoppingCartService) { }
 
   ngOnInit() {
-  }
-
-  addToCart() {
-    this.cartStorage.addToCart(this.product);
-  }
-
-  removeFromCart() {
-    this.cartStorage.removeFromCart(this.product);
   }
 }

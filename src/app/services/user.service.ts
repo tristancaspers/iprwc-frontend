@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, FirebaseObjectObservable} from "angularfire2/database";
-import * as firebase from "firebase";
-import {User} from "../models/user";
+import {ApiService} from "./api.service";
+import {AuthService} from "./auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserModel} from "../models/user";
 
 @Injectable()
 export class UserService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private api: ApiService,
+              private authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) {}
 
-  save(user: firebase.User) {
-    this.db.object("/users/" + user.uid).update({
-      name: user.displayName,
-      email: user.email
-    });
+  public signin(model: UserModel, remember: boolean) {
+    this.authService.setAuthorization(model.email, model.password);
+    this.api.get('users/me')
+      .subscribe(response => {
+        this.authService.storeAuthorization(response, remember);
+        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([returnUrl || '/']);
+        window.location.reload();
+      });
   }
 
-  get(uid: string): FirebaseObjectObservable<User> {
-    return this.db.object("/users/" + uid);
+  public signout() {
+    this.authService.deleteAuthorization();
+    window.location.reload();
   }
 }

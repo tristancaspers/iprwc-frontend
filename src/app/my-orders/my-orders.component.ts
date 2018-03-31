@@ -11,9 +11,7 @@ import "rxjs/add/operator/switchMap";
 export class MyOrdersComponent implements OnInit {
   orders$;
 
-  constructor(private auth: AuthService, private orderStorage: OrderService) {
-    this.orders$ = auth.user$.switchMap(u => this.orderStorage.getOrdersByUser(u.uid));
-  }
+  constructor(private auth: AuthService, private orderStorage: OrderService) {}
 
   ngOnInit() {
   }

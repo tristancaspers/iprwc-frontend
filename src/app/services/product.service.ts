@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from "angularfire2/database";
+import {ApiService} from "./api.service";
+import {ProductModel} from "../models/product";
 
 @Injectable()
 export class ProductService {
 
-  constructor(private db: AngularFireDatabase) { }
-
-  create(product) {
-    this.db.list("/products").push(product);
-  }
+  constructor(
+    private api: ApiService) {}
 
   getAll() {
-    return this.db.list("/products");
+    return this.api.get("products");
   }
 
-  get(productId) {
-    return this.db.object("/products/" + productId);
+  getById(id) {
+    return this.api.get("products/" + id);
   }
 
-  update(productId, product) {
-    return this.db.object("/products/" + productId).update(product);
+  create(model: ProductModel) {
+    this.api.post("products/", model);
   }
 
-  delete(productId) {
-    return this.db.object("/products/" + productId).remove();
+  update(id, model) {
+    return this.api.put("products/" + <string>id, model);
+  }
+
+  delete(id) {
+    return this.api.delete("products/" + <string>id);
   }
 }

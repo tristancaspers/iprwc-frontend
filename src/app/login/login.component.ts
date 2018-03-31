@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {UserModel} from "../models/user";
+import {UserService} from "../services/user.service";
 import {AuthService} from "../services/auth.service";
 
 @Component({
@@ -6,16 +8,20 @@ import {AuthService} from "../services/auth.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(private auth: AuthService) {
+  user: UserModel = new UserModel();
 
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {
+    if (this.authService.hasAuthorization()) {
+      this.user = this.authService.getAuthenticator();
+    }
   }
 
-  ngOnInit() {
-  }
-
-  login() {
-    this.auth.login();
+  public signin() {
+    this.userService.signin(this.user, false);
   }
 }

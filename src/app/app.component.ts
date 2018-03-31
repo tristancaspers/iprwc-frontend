@@ -8,16 +8,4 @@ import {UserService} from "./services/user.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(private auth: AuthService, private userStorage: UserService, router: Router) {
-    auth.user$.subscribe(user => {
-      if (!user) return;
-      userStorage.save(user);
-      let returnUrl = localStorage.getItem("returnUrl");
-
-      if(!returnUrl) return;
-      localStorage.removeItem("returnUrl");
-      router.navigateByUrl(returnUrl);
-    });
-  }
-}
+export class AppComponent {}

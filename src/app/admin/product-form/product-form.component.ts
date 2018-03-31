@@ -1,42 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {CategoryService} from "../../services/category.service";
 import {ProductService} from "../../services/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import "rxjs/add/operator/take";
+import {Observable} from "rxjs/Observable";
+import {ProductModel} from "../../models/product";
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
-  categories$;
-  product = {};
+export class ProductFormComponent {
+
+  products$: Observable<ProductModel>;
+  product: ProductModel;
   id;
 
   constructor(
-    private categoryStorage: CategoryService,
-    private productStorage: ProductService,
     private router: Router,
-    private route: ActivatedRoute) {
-    this.categories$ = categoryStorage.getAll();
+    private route: ActivatedRoute,
+    private productService: ProductService) {
+    this.products$ = productService.getAll();
     this.id = this.route.snapshot.paramMap.get("id");
-    if (this.id) this.productStorage.get(this.id).take(1).subscribe(p => this.product = p);
+    if (this.id) {
+      this.productService.getById(this.id).subscribe(p => {this.product = p;});
+    }
   }
 
-  ngOnInit() {
-  }
-
-  save(product) {
-    if (this.id) this.productStorage.update(this.id, product);
-    else this.productStorage.create(product);
-    this.router.navigate(["/admin/products"]);
+  update(product) {
+    if (this.id) {
+      this.productService.update(this.id, product);
+    } this.productService.create(product);
+    this.router.navigate(['admin/products']);
   }
 
   delete() {
-    if (confirm("Are you sure you want to delete this product?")) {
-      this.productStorage.delete(this.id);
-      this.router.navigate(["/admin/products"]);
+    if (confirm("Wil je het product verwijderen?")) {
+      this.productService.delete(this.id);
     }
+    this.router.navigate(["admin/products"]);
   }
 }

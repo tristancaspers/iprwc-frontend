@@ -1,37 +1,83 @@
 import { Injectable } from '@angular/core';
-import {AngularFireAuth} from "angularfire2/auth";
-import * as firebase from "firebase";
-import {Observable} from "rxjs/Observable";
-import {ActivatedRoute, Router} from "@angular/router";
-import {User} from "../models/user";
-import {UserService} from "./user.service";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/observable/of";
+import {UserModel} from "../models/user";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthService {
-  user$: Observable<firebase.User>;
+  private login: string = null;
+  private password: string = null;
+  private authenticator: UserModel = null;
 
-  constructor(private auth: AngularFireAuth, private userStorage: UserService, private route: ActivatedRoute, private router: Router) {
-    this.user$ = auth.authState;
+  public authorized$ = new Subject<boolean>();
+  public authorizedModel$ = new Subject<UserModel>();
+
+  constructor() {
+    this.restoreAuthorization();
   }
 
-  login() {
-    let returnUrl = this.route.snapshot.queryParamMap.get("returnUrl") || "/";
-    localStorage.setItem("returnUrl", returnUrl);
-    this.auth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  public hasAuthorization(): boolean {
+    return this.login !== null && this.password !== null;
   }
 
-  logout() {
-    this.auth.auth.signOut();
-    this.router.navigate(["/"]);
+  public setAuthorization(email: string, password: string): void {
+    this.login = email;
+    this.password = password;
   }
 
-  get appUser$(): Observable<User> {
-    return this.user$
-      .switchMap(user => {
-        if (user) return this.userStorage.get(user.uid);
-        return Observable.of(null);
-      });
+  public storeAuthorization(authenticator: UserModel, local: boolean) {
+    this.authenticator = authenticator;
+
+    const authorizationString = JSON.stringify(this.authenticator);
+    const storage = local ? localStorage : sessionStorage;
+
+    storage.setItem('authorization', authorizationString);
+
+    this.authorizedModel$.next(this.authenticator);
+    this.authorized$.next(true);
+  }
+
+  private restoreAuthorization(): void {
+    let authorizationString = sessionStorage.getItem('authorization');
+
+    if (authorizationString === null) {
+      authorizationString = localStorage.getItem('authorization');
+    }
+
+    if (authorizationString !== null) {
+      const authorization = JSON.parse(authorizationString);
+      const newAuthorization: UserModel = JSON.parse(authorizationString);
+
+      this.login = authorization['login'];
+      this.password = authorization['password'];
+
+      this.authenticator = newAuthorization;
+
+      this.authorizedModel$.next(this.authenticator);
+      this.authorized$.next(true);
+    }
+  }
+
+  public deleteAuthorization(): void {
+    this.authenticator = null;
+
+    sessionStorage.removeItem('authorization');
+    localStorage.removeItem('authorization');
+
+    this.authorized$.next(false);
+  }
+
+  public createAuthorizationString(): string {
+    return 'Basic ' + btoa(this.login + ':' + this.password);
+  }
+
+  public getAuthenticator(): UserModel {
+    this.restoreAuthorization();
+    return this.authenticator;
+  }
+
+  public setAuthenticator(authenticator: UserModel): void {
+    this.authenticator = authenticator;
   }
 }

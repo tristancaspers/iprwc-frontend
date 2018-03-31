@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ShoppingCartService} from "../services/shopping-cart.service";
+import {ShoppingCartModel} from "../models/shopping-cart";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,16 +8,16 @@ import {ShoppingCartService} from "../services/shopping-cart.service";
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  cart$;
 
-  constructor(private cartStorage: ShoppingCartService) { }
+  public cart: ShoppingCartModel;
 
-  async ngOnInit() {
-    this.cart$ = await this.cartStorage.getCart();
+  constructor(private cartService: ShoppingCartService) {}
+
+  ngOnInit() {
+    this.cart = this.cartService.getAuthenticatorCart();
   }
 
-  clearCart() {
-    if (confirm("Are you sure you want to remove all items from your shopping cart?"))
-    this.cartStorage.clearCart();
+  checkout() {
+    this.cartService.deleteCart();
   }
 }
