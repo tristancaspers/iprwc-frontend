@@ -26,7 +26,7 @@
         <th></th>
         <th><button class="btn btn-danger" *ngIf="cart.products.length" (click)="checkout()">Remove products <i class="fa fa-times-circle" aria-hidden="true"></i></button></th>
         <th><button class="btn btn-primary" *ngIf="cart.products.length" (click)="checkout()">Place order <i class="fa fa-check-circle" aria-hidden="true"></i></button></th>
-        <th class="text-right">{{ 5.00 | currency:"EUR":true }}</th>
+        <th class="text-right">{{ cart.totalprice | currency:"EUR":true }}</th>
       </tr>
     </tfoot>
   </table>

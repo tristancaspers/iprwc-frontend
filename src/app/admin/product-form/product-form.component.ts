@@ -13,7 +13,7 @@ import {ProductModel} from "../../shared/models/product";
 export class ProductFormComponent {
 
   products$: Observable<ProductModel>;
-  product: ProductModel;
+  product: ProductModel = new ProductModel();
   id;
 
   constructor(
@@ -36,6 +36,7 @@ export class ProductFormComponent {
     }
     console.log(product);
     this.router.navigate(['admin/products']);
+    window.location.reload();
   }
 
   delete() {
@@ -43,5 +44,6 @@ export class ProductFormComponent {
       this.productService.delete(this.id);
     }
     this.router.navigate(["admin/products"]);
+    window.location.reload();
   }
 }
