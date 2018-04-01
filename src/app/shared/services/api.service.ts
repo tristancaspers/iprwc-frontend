@@ -4,9 +4,9 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {BadInput} from "../common/bad-input";
-import {NotFoundError} from "../common/not-found-error";
-import {AppError} from "../common/app-error";
+import {BadInput} from "../../common/bad-input";
+import {NotFoundError} from "../../common/not-found-error";
+import {AppError} from "../../common/app-error";
 import {AuthService} from "./auth.service";
 
 @Injectable()
@@ -25,9 +25,7 @@ export class ApiService {
 
         queryString += `${prefix}${key}=${value}`;
       }
-    }
-
-    return queryString;
+    } return queryString;
   }
 
   private createURI(path: string, queryParameters: Object): string {
@@ -45,8 +43,6 @@ export class ApiService {
 
     return headers;
   }
-
-
 
   get(path: string, queryParameters?: Object) {
     const uri = this.createURI(path, queryParameters);
@@ -91,7 +87,6 @@ export class ApiService {
 
     if (error.status === 404) {
       return Observable.throw(new NotFoundError());
-    }
-    return Observable.throw(new AppError(error));
+    } return Observable.throw(new AppError(error));
   }
 }

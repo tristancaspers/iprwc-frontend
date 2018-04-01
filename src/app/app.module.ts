@@ -7,33 +7,23 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import {RouterModule} from "@angular/router";
 import { LoginComponent } from './login/login.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {AuthService} from "./services/auth.service";
-import {AuthGuardService} from "./services/auth-guard.service";
-import {UserService} from "./services/user.service";
-import {AdminAuthGuardService} from "./services/admin-auth-guard.service";
+import {AuthService} from "./shared/services/auth.service";
+import {AuthGuardService} from "./shared/services/auth-guard.service";
+import {UserService} from "./shared/services/user.service";
+import {AdminAuthGuardService} from "./shared/services/admin-auth-guard.service";
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import {CategoryService} from "./services/category.service";
 import {FormsModule} from "@angular/forms";
-import {ProductService} from "./services/product.service";
+import {ProductService} from "./shared/services/product.service";
 import {CustomFormsModule} from "ng2-validation";
 import {DataTableModule} from "angular-4-data-table";
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import {ShoppingCartService} from "./services/shopping-cart.service";
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import {OrderService} from "./services/order.service";
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
+import {ShoppingCartService} from "./shared/services/shopping-cart.service";
 import { FooterComponent } from './footer/footer.component';
-import {ApiService} from "./services/api.service";
+import {ApiService} from "./shared/services/api.service";
 
 @NgModule({
   declarations: [
@@ -41,18 +31,10 @@ import {ApiService} from "./services/api.service";
     NavbarComponent,
     ProductsComponent,
     ShoppingCartComponent,
-    CheckOutComponent,
-    MyOrdersComponent,
     AdminProductsComponent,
-    AdminOrdersComponent,
     LoginComponent,
-    OrderSuccessComponent,
     ProductFormComponent,
-    ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent,
-    ShoppingCartSummaryComponent,
-    ShippingFormComponent,
     FooterComponent
   ],
   imports: [
@@ -69,18 +51,12 @@ import {ApiService} from "./services/api.service";
       {path: "shopping-cart", component: ShoppingCartComponent},
       {path: "login", component: LoginComponent},
 
-      {path: "check-out", component: CheckOutComponent, canActivate: [AuthGuardService]},
-      {path: "order-success/:id", component: OrderSuccessComponent, canActivate: [AuthGuardService]},
-      {path: "my/orders", component: MyOrdersComponent, canActivate: [AuthGuardService]},
-
       {path: "admin/products/new", component: ProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]},
       {path: "admin/products/:id", component: ProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]},
       {path: "admin/products", component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]},
-      {path: "admin/orders", component: AdminOrdersComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]},
+        canActivate: [AuthGuardService, AdminAuthGuardService]}
     ])
   ],
   providers: [
@@ -88,10 +64,8 @@ import {ApiService} from "./services/api.service";
     AuthGuardService,
     AdminAuthGuardService,
     UserService,
-    CategoryService,
     ProductService,
     ShoppingCartService,
-    OrderService,
     ApiService
   ],
   bootstrap: [AppComponent]

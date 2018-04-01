@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {ProductService} from "../services/product.service";
-import {ProductModel} from "../models/product";
+import {ProductService} from "../shared/services/product.service";
+import {ProductModel} from "../shared/models/product";
 import "rxjs/add/operator/switchMap";
 import {Observable} from "rxjs/Observable";
 
@@ -20,5 +20,4 @@ export class ProductsComponent {
   ) {
     this.products$ = this.productService.getAll();
   }
-
 }

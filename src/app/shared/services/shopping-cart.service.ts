@@ -9,7 +9,9 @@ export class ShoppingCartService {
 
   private authenticatorCart: ShoppingCartModel = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // this.restoreAuthenticatorCart();
+  }
 
   public storeAuthorizationCart(authenticatorCart: ShoppingCartModel): void {
     this.authenticatorCart = authenticatorCart;
@@ -18,6 +20,7 @@ export class ShoppingCartService {
     const storage = localStorage;
 
     storage.setItem('authorizationCart', authorizationCartString);
+    console.log('store cart auth ' + storage.getItem('authorizationCart'));
   }
 
   public restoreAuthenticatorCart(): void {
@@ -30,18 +33,23 @@ export class ShoppingCartService {
     if (authenticatorCartString  !== null) {
       let authorizationCartModel: ShoppingCartModel = JSON.parse(authenticatorCartString);
       this.authenticatorCart = authorizationCartModel;
-    } this.authenticatorCart = new ShoppingCartModel();
+    } else {
+      this.authenticatorCart = new ShoppingCartModel();
+    }
   }
 
   public getAuthenticatorCart(): ShoppingCartModel {
     this.restoreAuthenticatorCart();
     return this.authenticatorCart;
+    // return this.authenticatorCart;
   }
 
   deleteCart() {
     this.authenticatorCart = null;
+
     sessionStorage.removeItem('authorizationCart');
     localStorage.removeItem('authorizationCart');
+
     this.router.navigate(['']);
   }
 }

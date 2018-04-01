@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import {CategoryService} from "../../services/category.service";
-import {ProductService} from "../../services/product.service";
+import {ProductService} from "../../shared/services/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import "rxjs/add/operator/take";
 import {Observable} from "rxjs/Observable";
-import {ProductModel} from "../../models/product";
+import {ProductModel} from "../../shared/models/product";
 
 @Component({
   selector: 'app-product-form',
@@ -31,7 +30,11 @@ export class ProductFormComponent {
   update(product) {
     if (this.id) {
       this.productService.update(this.id, product);
-    } this.productService.create(product);
+    } else {
+      this.productService.create(product);
+      console.log(product);
+    }
+    console.log(product);
     this.router.navigate(['admin/products']);
   }
 

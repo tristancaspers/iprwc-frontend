@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ProductService} from "../../services/product.service";
-import {ProductModel} from "../../models/product";
+import {ProductService} from "../../shared/services/product.service";
+import {ProductModel} from "../../shared/models/product";
 import {DataTableResource} from "angular-4-data-table";
 
 @Component({
@@ -42,8 +42,6 @@ export class AdminProductsComponent {
   reloadItems(params) {
     if (!this.tableResource) {
       return;
-    }
-
-    this.tableResource.query(params).then(items => this.items = items);
+    } this.tableResource.query(params).then(items => this.items = items);
   }
 }

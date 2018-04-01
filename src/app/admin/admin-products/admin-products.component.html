@@ -1,6 +1,6 @@
 <div>
   <input class="form-control" #query type="text" placeholder="Search..." (keyup)="filter(query.value)">
-  <a class="btn btn-primary" routerLink="/admin/products/new"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  <a class="btn btn-primary" routerLink="/admin/products/new">Add product <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 </div>
 
 <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
@@ -10,9 +10,9 @@
       {{ item.price | currency:"EUR":true }}
     </ng-template>
   </data-table-column>
-  <data-table-column [property]="'$key'">
+  <data-table-column [property]="'id'">
     <ng-template #dataTableCell let-item="item">
-      <a [routerLink]="['/admin/products/', item.$key]">Edit</a>
+      <a [routerLink]="['/admin/products/', item.id]">Edit</a>
     </ng-template>
   </data-table-column>
 </data-table>

@@ -1,35 +1,32 @@
 <h1>Shopping Cart</h1>
-<div class="row col-10" *ngIf="cart$ | async as cart">
+<div class="row col-10" *ngIf="cart">
   <p>
-    You have {{ cart.totalItemsCount }} item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    You have {{ cart.products.length }} item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
   </p>
   <table class="table">
     <thead>
       <tr>
         <th></th>
         <th>Product</th>
-        <th class="text-center" style="width: 230px">Quantity</th>
-        <th class="text-right" style="width: 200px">Price</th>
+        <th>Quantity</th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of cart.items">
+      <tr *ngFor="let p of cart.products">
         <td>
-          <div class="thumbnail" [style.backgroundImage]="'url(' + item.imageUrl + ')'"></div>
-        </td>
-        <td>{{ item.title }}</td>
-        <td>
-          <app-product-quantity [product]="item" [shopping-cart]="cart"></app-product-quantity>
-        </td>
-        <td class="text-right">{{ item.totalPrice | currency:"EUR":true }}</td>
+          <div class="thumbnail" [style.backgroundImage]="'url(' + p.imageurl + ')'"></div></td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.quantity }}</td>
+        <td class="text-right">{{ p.price * p.quantity | currency:"EUR":true }}</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <th>  <button class="btn btn-danger" *ngIf="cart.items.length" (click)="clearCart()">Remove items <i class="fa fa-times-circle" aria-hidden="true"></i></button></th>
         <th></th>
-        <th>  <a class="btn btn-primary" *ngIf="cart.items.length" routerLink="/check-out">Place order <i class="fa fa-check-circle" aria-hidden="true"></i></a></th>
-        <th class="text-right">{{ cart.totalPrice | currency:"EUR":true }}</th>
+        <th><button class="btn btn-danger" *ngIf="cart.products.length" (click)="checkout()">Remove products <i class="fa fa-times-circle" aria-hidden="true"></i></button></th>
+        <th><button class="btn btn-primary" *ngIf="cart.products.length" (click)="checkout()">Place order <i class="fa fa-check-circle" aria-hidden="true"></i></button></th>
+        <th class="text-right">{{ 5.00 | currency:"EUR":true }}</th>
       </tr>
     </tfoot>
   </table>

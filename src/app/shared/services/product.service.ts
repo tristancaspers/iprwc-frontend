@@ -17,14 +17,14 @@ export class ProductService {
   }
 
   create(model: ProductModel) {
-    this.api.post("products/", model);
+    this.api.post("products/", model).subscribe();
   }
 
-  update(id, model) {
-    return this.api.put("products/" + <string>id, model);
+  update(id, model: ProductModel) {
+    return this.api.put("products/" + <string>id, model).subscribe();
   }
 
   delete(id) {
-    return this.api.delete("products/" + <string>id);
+    return this.api.delete("products/" + <string>id).subscribe();
   }
 }
