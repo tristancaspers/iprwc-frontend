@@ -13,7 +13,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart">Shopping Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+          <a class="nav-link" routerLink="/shopping-cart">Shopping Cart <i class="fa fa-shopping-cart" aria-hidden="true"><span *ngIf="cart.products" class="badge ">{{ cart.products.length }}</span></i></a>
         </li>
       </ul>
       <ul class="navbar-nav">

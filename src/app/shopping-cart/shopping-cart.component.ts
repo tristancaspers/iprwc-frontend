@@ -28,4 +28,13 @@ export class ShoppingCartComponent implements OnInit {
     this.removeProducts();
     this.router.navigate(['order']);
   }
+
+  calculate() {
+    let totalPrice: number;
+    for (let p of this.cart.products) {
+      console.log(p.price);
+      totalPrice = totalPrice + p.price.valueOf();
+      console.log(totalPrice);
+    } return totalPrice;
+  }
 }

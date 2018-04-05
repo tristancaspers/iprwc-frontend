@@ -14,10 +14,12 @@ import {ShoppingCartService} from "../shared/services/shopping-cart.service";
 export class NavbarComponent implements OnInit {
 
   user: UserModel = {};
+  public cart: ShoppingCartModel;
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private cartService: ShoppingCartService,
     private router: Router) {
     this.user = this.authService.getAuthenticator();
   }
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.user = this.authService.getAuthenticator();
+    this.cart = this.cartService.getAuthenticatorCart();
   }
 
   logout() {
