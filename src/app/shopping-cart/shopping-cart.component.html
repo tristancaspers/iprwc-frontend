@@ -1,9 +1,12 @@
 <h1>Shopping Cart</h1>
 <div class="row col-10" *ngIf="cart">
-  <p>
+  <p *ngIf="cart.products">
     You have {{ cart.products.length }} item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
   </p>
-  <table class="table">
+  <p *ngIf="!cart.products">
+    You have 0 item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+  </p>
+  <table *ngIf="cart.products" class="table">
     <thead>
       <tr>
         <th></th>

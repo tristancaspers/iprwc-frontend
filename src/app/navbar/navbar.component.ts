@@ -35,4 +35,8 @@ export class NavbarComponent implements OnInit {
     this.userService.signout();
     this.router.navigate([""]);
   }
+
+  redirect() {
+    alert("This function is not implemented yet!");
+  }
 }
