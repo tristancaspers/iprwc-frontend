@@ -29,7 +29,7 @@
         <th></th>
         <th><button class="btn btn-danger" *ngIf="cart.products.length" (click)="removeProducts()">Remove products <i class="fa fa-times-circle" aria-hidden="true"></i></button></th>
         <th><button class="btn btn-primary" *ngIf="cart.products.length" (click)="checkout()">Place order <i class="fa fa-check-circle" aria-hidden="true"></i></button></th>
-        <th class="text-right">{{ calculate() | currency:"EUR":true }}</th>
+        <th class="text-right">{{ totalPrice() | currency:"EUR":true }}</th>
       </tr>
     </tfoot>
   </table>

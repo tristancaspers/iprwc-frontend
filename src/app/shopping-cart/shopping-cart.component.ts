@@ -14,7 +14,8 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private cartService: ShoppingCartService,
-    private router: Router) {}
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.cart = this.cartService.getAuthenticatorCart();
@@ -27,14 +28,14 @@ export class ShoppingCartComponent implements OnInit {
   checkout() {
     this.removeProducts();
     this.router.navigate(['order']);
+    window.location.reload();
   }
 
-  calculate() {
-    let totalPrice: number;
-    for (let p of this.cart.products) {
-      console.log(p.price);
-      totalPrice = totalPrice + p.price.valueOf();
-      console.log(totalPrice);
-    } return totalPrice;
+  totalPrice() {
+    let sum = 0;
+    for (let p of this.cart.products)
+      sum += p.price;
+    return sum;
   }
 }
+
