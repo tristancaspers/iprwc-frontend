@@ -24,4 +24,8 @@ export class LoginComponent {
   public signin() {
     this.userService.signin(this.user, false);
   }
+
+  public loginWithGoogle() {
+
+  }
 }

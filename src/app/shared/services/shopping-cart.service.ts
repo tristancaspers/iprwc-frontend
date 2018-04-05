@@ -41,7 +41,6 @@ export class ShoppingCartService {
   public getAuthenticatorCart(): ShoppingCartModel {
     this.restoreAuthenticatorCart();
     return this.authenticatorCart;
-    // return this.authenticatorCart;
   }
 
   deleteCart() {

@@ -24,6 +24,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
 import {ShoppingCartService} from "./shared/services/shopping-cart.service";
 import { FooterComponent } from './footer/footer.component';
 import {ApiService} from "./shared/services/api.service";
+import { OrderPlacedComponent } from './order-placed/order-placed.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {ApiService} from "./shared/services/api.service";
     LoginComponent,
     ProductFormComponent,
     ProductCardComponent,
-    FooterComponent
+    FooterComponent,
+    OrderPlacedComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,8 @@ import {ApiService} from "./shared/services/api.service";
       {path: "products", component: ProductsComponent},
       {path: "shopping-cart", component: ShoppingCartComponent},
       {path: "login", component: LoginComponent},
+      {path: "order", component: OrderPlacedComponent,
+        canActivate: [AuthGuardService]},
 
       {path: "admin/products/new", component: ProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]},

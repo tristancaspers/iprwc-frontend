@@ -3,6 +3,8 @@ import {AuthService} from "../shared/services/auth.service";
 import {UserModel} from "../shared/models/user";
 import {UserService} from "../shared/services/user.service";
 import {Router} from "@angular/router";
+import {ShoppingCartModel} from "../shared/models/shopping-cart";
+import {ShoppingCartService} from "../shared/services/shopping-cart.service";
 
 @Component({
   selector: 'app-navbar',

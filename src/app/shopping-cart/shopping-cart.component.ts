@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ShoppingCartService} from "../shared/services/shopping-cart.service";
 import {ShoppingCartModel} from "../shared/models/shopping-cart";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,13 +12,20 @@ export class ShoppingCartComponent implements OnInit {
 
   public cart: ShoppingCartModel;
 
-  constructor(private cartService: ShoppingCartService) {}
+  constructor(
+    private cartService: ShoppingCartService,
+    private router: Router) {}
 
   ngOnInit() {
     this.cart = this.cartService.getAuthenticatorCart();
   }
 
-  checkout() {
+  removeProducts() {
     this.cartService.deleteCart();
+  }
+
+  checkout() {
+    this.removeProducts();
+    this.router.navigate(['order']);
   }
 }
