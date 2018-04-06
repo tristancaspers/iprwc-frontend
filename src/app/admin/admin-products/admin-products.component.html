@@ -10,7 +10,7 @@
       {{ item.price | currency:"EUR":true }}
     </ng-template>
   </data-table-column>
-  <data-table-column [property]="'id'">
+  <data-table-column [property]="'id'" [header]="'Function'">
     <ng-template #dataTableCell let-item="item">
       <a [routerLink]="['/admin/products/', item.id]">Edit</a>
     </ng-template>

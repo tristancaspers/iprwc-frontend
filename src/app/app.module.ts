@@ -19,7 +19,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import {FormsModule} from "@angular/forms";
 import {ProductService} from "./shared/services/product.service";
 import {CustomFormsModule} from "ng2-validation";
-import {DataTableModule} from "angular-4-data-table";
+import {DataTableModule} from "angular5-data-table";
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import {ShoppingCartService} from "./shared/services/shopping-cart.service";
 import { FooterComponent } from './footer/footer.component';
