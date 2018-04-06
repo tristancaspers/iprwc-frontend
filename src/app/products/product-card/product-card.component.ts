@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ProductModel} from "../../shared/models/product";
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {ShoppingCartModel} from "../../shared/models/shopping-cart";
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-card',
@@ -20,8 +21,8 @@ export class ProductCardComponent {
 
 
   addToCart(product: ProductModel) {
-    let cardModel = this.cartService.getAuthenticatorCart();
-    if (!cardModel.id) {
+    let cartModel = this.cartService.getAuthenticatorCart();
+    if (!cartModel.id) {
       this.cartModel.id = Math.random();
       this.cartModel.products = [];
       this.cartModel.products.push(product);
@@ -42,7 +43,11 @@ export class ProductCardComponent {
       }
       this.cartService.storeAuthorizationCart(this.cartModel);
     }
-    window.location.reload();
+    swal({
+      title: product.title,
+      text: 'is now in your shopping cart!',
+      type: 'success',
+      confirmButtonText: 'OK'}).then(() => window.location.reload());
   }
 
   getCartId(): number {
@@ -52,14 +57,11 @@ export class ProductCardComponent {
     } return model.id = Math.random() ? model.id : new ShoppingCartModel().id;
   }
 
-
   getQuantity() {
     if (!this.cartModel) {
       return 0;
     }
-
     this.cartModel.products = [];
-
     let item = this.cartModel.products[this.product.id];
     return item ? item.quantity : 0;
   }

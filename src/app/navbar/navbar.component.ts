@@ -5,6 +5,7 @@ import {UserService} from "../shared/services/user.service";
 import {Router} from "@angular/router";
 import {ShoppingCartModel} from "../shared/models/shopping-cart";
 import {ShoppingCartService} from "../shared/services/shopping-cart.service";
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-navbar',
@@ -40,6 +41,10 @@ export class NavbarComponent implements OnInit {
   }
 
   redirect() {
-    alert("This function is not implemented yet!");
+    swal({
+      title: "Oops...",
+      text: 'This function is not implemented yet!',
+      type: 'error',
+      confirmButtonText: 'OK'});
   }
 }

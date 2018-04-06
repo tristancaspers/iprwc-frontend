@@ -9,9 +9,7 @@ export class ShoppingCartService {
 
   private authenticatorCart: ShoppingCartModel = null;
 
-  constructor(private router: Router) {
-    // this.restoreAuthenticatorCart();
-  }
+  constructor(private router: Router) {}
 
   public storeAuthorizationCart(authenticatorCart: ShoppingCartModel): void {
     this.authenticatorCart = authenticatorCart;
@@ -20,7 +18,6 @@ export class ShoppingCartService {
     const storage = localStorage;
 
     storage.setItem('authorizationCart', authorizationCartString);
-    console.log('store cart auth ' + storage.getItem('authorizationCart'));
   }
 
   public restoreAuthenticatorCart(): void {
@@ -45,10 +42,8 @@ export class ShoppingCartService {
 
   deleteCart() {
     this.authenticatorCart = null;
-
     sessionStorage.removeItem('authorizationCart');
     localStorage.removeItem('authorizationCart');
-
     this.router.navigate(['']);
   }
 }
