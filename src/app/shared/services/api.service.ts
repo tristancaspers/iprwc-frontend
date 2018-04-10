@@ -31,7 +31,7 @@ export class ApiService {
   private createURI(path: string, queryParameters: Object): string {
     const queryString = this.createQueryString(queryParameters);
 
-    return `http://localhost:8080/${path}${queryString}`;
+    return `http://145.97.16.189:8028/${path}${queryString}`;
   }
 
   private createRequestHeaders(): HttpHeaders {
