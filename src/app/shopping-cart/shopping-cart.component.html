@@ -1,0 +1,37 @@
+<h1>Shopping Cart</h1>
+<div class="row col-10" *ngIf="cart">
+  <p *ngIf="cart.products">
+    You have {{ cart.products.length }} item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+  </p>
+  <p *ngIf="!cart.products">
+    You have 0 item(s) in your shopping cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+  </p>
+  <table *ngIf="cart.products" class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of cart.products">
+        <td>
+          <div class="thumbnail" [style.backgroundImage]="'url(' + p.imageurl + ')'"></div></td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.quantity }}</td>
+        <td class="text-right">{{ p.price * p.quantity | currency:'EUR':'symbol-narrow' }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th><button class="btn btn-danger" *ngIf="cart.products.length" (click)="removeProducts()">Remove products <i class="fa fa-times-circle" aria-hidden="true"></i></button></th>
+        <th><button class="btn btn-primary" *ngIf="cart.products.length" (click)="checkout()">Place order <i class="fa fa-check-circle" aria-hidden="true"></i></button></th>
+        <th class="text-right">{{ totalPrice() | currency:'EUR':'symbol-narrow' }}</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+

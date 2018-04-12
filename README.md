@@ -1,27 +1,44 @@
-# IprwcFrontend
+# IPRWC - WEBSHOP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
+Dit is de Angular front-end.
 
-## Development server
+# INLOGGEGEVENS
+STUDENTEN ACCOUNT (user)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Email: student@hsleiden.nl
+- Wachtwoord: test
 
-## Code scaffolding
+DOCENTEN ACCOUNT (admin)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Email: docent@hsleiden.nl
+- Wachtwoord: test
 
-## Build
+# FRONT END URI'S
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+http://www.tristancaspers.com/#
+   
+    Home: /
+    Inloggen: /login
+    Producten-overzicht voor klant: /products
+    Winkelwagentje: /shopping-cart
+    Bestelling geplaatst: /order
+    
+    Productenoverzicht voor beheerder: /admin/products
+    Nieuw product aanmaken door beheerder: /admin/products/new
+    Bestaand product aanpassen door beheerder: /admin/products/:id
+    
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# API URI'S
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+http://167.99.215.253:8028
+    
+    GET     /products (com.tristancaspers.resource.ProductResource)
+    POST    /products (com.tristancaspers.resource.ProductResource)
+    DELETE  /products/{id} (com.tristancaspers.resource.ProductResource)
+    GET     /products/{id} (com.tristancaspers.resource.ProductResource)
+    PUT     /products/{id} (com.tristancaspers.resource.ProductResource)
+    POST    /users (com.tristancaspers.resource.UserResource)
+    GET     /users/me (com.tristancaspers.resource.UserResource)
+    DELETE  /users/{id} (com.tristancaspers.resource.UserResource)
+    PUT     /users/{id} (com.tristancaspers.resource.UserResource)
