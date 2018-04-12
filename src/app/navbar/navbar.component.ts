@@ -17,11 +17,7 @@ export class NavbarComponent implements OnInit {
   user: UserModel = {};
   public cart: ShoppingCartModel;
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private cartService: ShoppingCartService,
-    private router: Router) {
+  constructor(private userService: UserService, private authService: AuthService, private cartService: ShoppingCartService, private router: Router) {
     this.user = this.authService.getAuthenticator();
   }
 
@@ -37,7 +33,8 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.signout();
-    this.router.navigate([""]);
+    this.router.navigate(["/"]);
+    window.location.reload();
   }
 
   redirect() {

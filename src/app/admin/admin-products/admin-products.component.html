@@ -7,7 +7,7 @@
   <data-table-column [property]="'title'" [header]="'Title'" [sortable]="true" [resizable]="true"></data-table-column>
   <data-table-column [property]="'price'" [header]="'Price'" [sortable]="true" [resizable]="true">
     <ng-template #dataTableCell let-item="item">
-      {{ item.price | currency:"EUR":true }}
+      {{ item.price | currency:'EUR':'symbol-narrow' }}
     </ng-template>
   </data-table-column>
   <data-table-column [property]="'id'" [header]="'Function'">

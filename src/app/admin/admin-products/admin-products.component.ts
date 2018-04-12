@@ -15,9 +15,7 @@ export class AdminProductsComponent {
   items: ProductModel[] = [];
   itemCount: number;
 
-  constructor(
-    private productService: ProductService
-  ) {
+  constructor(private productService: ProductService) {
     this.productService.getAll().subscribe(response => {
       this.products = response;
       this.initTable(response);

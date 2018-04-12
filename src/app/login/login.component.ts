@@ -12,10 +12,7 @@ export class LoginComponent {
 
   user: UserModel = new UserModel();
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService
-  ) {
+  constructor(private userService: UserService, private authService: AuthService) {
     if (this.authService.hasAuthorization()) {
       this.user = this.authService.getAuthenticator();
     }
@@ -25,7 +22,5 @@ export class LoginComponent {
     this.userService.signin(this.user, false);
   }
 
-  public loginWithGoogle() {
-
-  }
+  public loginWithGoogle() {}
 }

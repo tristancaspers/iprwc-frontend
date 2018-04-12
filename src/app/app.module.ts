@@ -61,7 +61,7 @@ import { OrderPlacedComponent } from './order-placed/order-placed.component';
         canActivate: [AuthGuardService, AdminAuthGuardService]},
       {path: "admin/products", component: AdminProductsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]}
-    ])
+    ], {useHash:true})
   ],
   providers: [
     AuthService,

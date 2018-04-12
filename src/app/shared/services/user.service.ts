@@ -25,6 +25,5 @@ export class UserService {
 
   public signout() {
     this.authService.deleteAuthorization();
-    window.location.reload();
   }
 }

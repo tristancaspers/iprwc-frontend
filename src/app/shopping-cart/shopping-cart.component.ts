@@ -23,12 +23,12 @@ export class ShoppingCartComponent implements OnInit {
 
   removeProducts() {
     this.cartService.deleteCart();
+    window.location.reload();
   }
 
   checkout() {
     this.removeProducts();
-    this.router.navigate(['order']);
-    window.location.reload();
+    this.router.navigate(['/order']);
   }
 
   totalPrice() {

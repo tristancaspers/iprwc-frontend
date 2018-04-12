@@ -44,6 +44,6 @@ export class ShoppingCartService {
     this.authenticatorCart = null;
     sessionStorage.removeItem('authorizationCart');
     localStorage.removeItem('authorizationCart');
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 }

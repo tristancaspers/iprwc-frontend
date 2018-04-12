@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import "rxjs/add/operator/take";
 import {Observable} from "rxjs/Observable";
 import {ProductModel} from "../../shared/models/product";
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-product-form',
@@ -32,18 +33,22 @@ export class ProductFormComponent {
       this.productService.update(this.id, product);
     } else {
       this.productService.create(product);
-      console.log(product);
     }
-    console.log(product);
-    this.router.navigate(['admin/products']);
+    this.router.navigate(['/admin/products']);
     window.location.reload();
   }
 
   delete() {
-    if (confirm("Wil je het product verwijderen?")) {
+    swal({
+      title: this.product.title,
+      text: 'are you sure to delete this?',
+      type: 'question',
+      showCancelButton: true,
+      cancelButtonText: "NO",
+      confirmButtonText: "YES"}).then(() => {
       this.productService.delete(this.id);
-    }
-    this.router.navigate(["admin/products"]);
-    window.location.reload();
+      this.router.navigate(["/admin/products"]);
+      window.location.reload();
+    });
   }
 }

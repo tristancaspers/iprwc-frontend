@@ -15,9 +15,7 @@ export class ProductsComponent {
 
   @Input("show-actions") showActions = true;
 
-  constructor(
-    private productService: ProductService
-  ) {
+  constructor(private productService: ProductService) {
     this.products$ = this.productService.getAll();
   }
 }
